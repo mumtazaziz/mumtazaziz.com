@@ -54,7 +54,7 @@ export default async function Header() {
 
   return (
     <div className="fixed w-full">
-      <header className="container mx-auto flex h-16 items-center px-4 text-base">
+      <header className="container mx-auto flex h-16 items-center px-4">
         <div className="ms-auto flex">
           {...profiles.map((profile) => (
             <Link
