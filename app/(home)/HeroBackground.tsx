@@ -13,7 +13,9 @@ const BreathingTspans = memo(function BreathingTspans({
       c
     ) : (
       <tspan
-        style={{ animationDelay: `${(i / text.length - 1) * 5}s` }}
+        style={{
+          animationDelay: `calc(var(--breath-duration) * ${i / text.length - 1})`,
+        }}
         key={i}
       >
         {c}
@@ -30,6 +32,7 @@ interface InnerSVGProps {
 const InnerSVG = memo(function InnerSVG({ width, height }: InnerSVGProps) {
   const rows = 10;
   const text = "MUMTAZ AZIZ";
+  const duration = 5;
 
   return (
     <>
@@ -40,6 +43,7 @@ const InnerSVG = memo(function InnerSVG({ width, height }: InnerSVGProps) {
           y={((i + 1) / rows) * height}
           fontSize={height / rows}
           className={styles.breath}
+          style={{ "--breath-duration": `${duration}s` } as React.CSSProperties}
         >
           <BreathingTspans text={text} /> <BreathingTspans text={text} />{" "}
           <BreathingTspans text={text} />

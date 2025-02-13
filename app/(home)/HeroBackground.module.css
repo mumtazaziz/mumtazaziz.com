@@ -1,12 +1,10 @@
 @keyframes breath {
-  0% {
+  0%,
+  100% {
     font-weight: 400;
   }
   50% {
-    font-weight: 700;
-  }
-  100% {
-    font-weight: 400;
+    font-weight: 900;
   }
 }
 
@@ -16,7 +14,7 @@
 
 .breath tspan {
   animation-name: breath;
-  animation-duration: 5s;
+  animation-duration: var(--breath-duration);
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
