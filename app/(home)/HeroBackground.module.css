@@ -1,0 +1,28 @@
+@keyframes breath {
+  0% {
+    font-weight: 400;
+  }
+  50% {
+    font-weight: 700;
+  }
+  100% {
+    font-weight: 400;
+  }
+}
+
+.root text {
+  text-anchor: middle;
+}
+
+.breath tspan {
+  animation-name: breath;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breath tspan {
+    animation-play-state: paused;
+  }
+}
