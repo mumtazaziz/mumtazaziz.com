@@ -10,6 +10,7 @@
 
 .root text {
   text-anchor: middle;
+  dominant-baseline: central;
 }
 
 .breath tspan {
