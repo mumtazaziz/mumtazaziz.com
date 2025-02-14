@@ -5,53 +5,54 @@ interface BreathingTspansProps {
   text: string;
 }
 
-const BreathingTspans = memo(function BreathingTspans({
-  text,
-}: BreathingTspansProps) {
-  return text.split("").map((c, i) =>
-    c.match(/\s/) ? (
-      c
-    ) : (
-      <tspan
-        style={{
-          animationDelay: `calc(var(--breath-duration) * ${i / text.length - 1})`,
-        }}
-        key={i}
-      >
-        {c}
-      </tspan>
-    ),
-  );
-});
+function BreathingTspans({ text }: BreathingTspansProps) {
+  return text.split("").map((c, i) => (
+    <tspan
+      style={{
+        animationDelay: `calc(var(--breath-duration) * ${i / text.length - 1})`,
+      }}
+      key={i}
+    >
+      {c}
+    </tspan>
+  ));
+}
 
 interface InnerSVGProps {
   width: number;
   height: number;
+  rows?: number;
+  text: string;
+  duration?: number;
 }
 
-const InnerSVG = memo(function InnerSVG({ width, height }: InnerSVGProps) {
-  const rows = 10;
-  const text = "MUMTAZ AZIZ";
-  const duration = 5;
+function InnerSVG({
+  width,
+  height,
+  rows = 9,
+  text,
+  duration = 5,
+}: InnerSVGProps) {
+  const characters = <BreathingTspans text={text} />;
+  const fontSize = height / (rows - 1);
 
   return (
     <>
       {...new Array(rows).fill(undefined).map((_, i) => (
         <text
           key={i}
-          x={(width / 2) * (i / (rows - 1) + 0.5)}
-          y={((i + 1) / rows) * height}
-          fontSize={height / rows}
+          x={(width + height * (i / (rows - 1) - 0.5)) / 2}
+          y={(height * i) / (rows - 1)}
+          fontSize={fontSize}
           className={styles.breath}
           style={{ "--breath-duration": `${duration}s` } as React.CSSProperties}
         >
-          <BreathingTspans text={text} /> <BreathingTspans text={text} />{" "}
-          <BreathingTspans text={text} />
+          {characters} {characters} {characters}
         </text>
       ))}
     </>
   );
-});
+}
 
 export default function HeroBackground(
   props: React.SVGAttributes<SVGSVGElement>,
@@ -67,7 +68,7 @@ export default function HeroBackground(
       viewBox={`0 0 ${width} ${height}`}
       preserveAspectRatio="xMidYMid slice"
     >
-      <InnerSVG width={width} height={height} />
+      <InnerSVG width={width} height={height} text="MUMTAZ AZIZ" />
     </svg>
   );
 }
