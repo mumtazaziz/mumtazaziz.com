@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "./globals.css";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     <html lang="en" className={`${inter.variable}`}>
       <body>
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
