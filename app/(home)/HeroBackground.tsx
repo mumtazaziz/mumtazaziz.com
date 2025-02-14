@@ -1,4 +1,3 @@
-import { memo } from "react";
 import styles from "./HeroBackground.module.css";
 
 interface BreathingTspansProps {
